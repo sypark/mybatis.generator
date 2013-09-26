@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gslook.search.indexer.dao.mapper.TypeFieldMapper" >
+  <resultMap id="BaseResultMap" type="com.gslook.search.queryplanner.domain.TypeField" >
+    <id column="type_field_seq" property="typeFieldSeq" jdbcType="INTEGER" />
+    <result column="reg_dtm" property="regDtm" jdbcType="TIMESTAMP" />
+    <result column="regr_id" property="regrId" jdbcType="VARCHAR" />
+    <result column="mod_dtm" property="modDtm" jdbcType="TIMESTAMP" />
+    <result column="modr_id" property="modrId" jdbcType="VARCHAR" />
+    <result column="type_seq" property="typeSeq" jdbcType="INTEGER" />
+    <result column="field_nm" property="fieldNm" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="store" property="store" jdbcType="VARCHAR" />
+    <result column="index_attr" property="indexAttr" jdbcType="VARCHAR" />
+    <result column="index_options" property="indexOptions" jdbcType="VARCHAR" />
+    <result column="ignore_malformed" property="ignoreMalformed" jdbcType="VARCHAR" />
+    <result column="include_in_all" property="includeInAll" jdbcType="VARCHAR" />
+    <result column="index_analyzer" property="indexAnalyzer" jdbcType="VARCHAR" />
+    <result column="search_analyzer" property="searchAnalyzer" jdbcType="VARCHAR" />
+    <result column="term_vector" property="termVector" jdbcType="VARCHAR" />
+    <result column="omit_norms" property="omitNorms" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    type_field_seq, reg_dtm, regr_id, mod_dtm, modr_id, type_seq, field_nm, type, store, 
+    index_attr, index_options, ignore_malformed, include_in_all, index_analyzer, search_analyzer, 
+    term_vector, omit_norms
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gslook.search.queryplanner.domain.TypeFieldExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from type_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gslook.search.queryplanner.domain.TypeFieldExample" >
+    delete from type_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.gslook.search.queryplanner.domain.TypeField" >
+    <selectKey resultType="java.lang.Integer" keyProperty="typeFieldSeq" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into type_field
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="regDtm != null" >
+        reg_dtm,
+      </if>
+      <if test="regrId != null" >
+        regr_id,
+      </if>
+      <if test="modDtm != null" >
+        mod_dtm,
+      </if>
+      <if test="modrId != null" >
+        modr_id,
+      </if>
+      <if test="typeSeq != null" >
+        type_seq,
+      </if>
+      <if test="fieldNm != null" >
+        field_nm,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="store != null" >
+        store,
+      </if>
+      <if test="indexAttr != null" >
+        index_attr,
+      </if>
+      <if test="indexOptions != null" >
+        index_options,
+      </if>
+      <if test="ignoreMalformed != null" >
+        ignore_malformed,
+      </if>
+      <if test="includeInAll != null" >
+        include_in_all,
+      </if>
+      <if test="indexAnalyzer != null" >
+        index_analyzer,
+      </if>
+      <if test="searchAnalyzer != null" >
+        search_analyzer,
+      </if>
+      <if test="termVector != null" >
+        term_vector,
+      </if>
+      <if test="omitNorms != null" >
+        omit_norms,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="regDtm != null" >
+        #{regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regrId != null" >
+        #{regrId,jdbcType=VARCHAR},
+      </if>
+      <if test="modDtm != null" >
+        #{modDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modrId != null" >
+        #{modrId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSeq != null" >
+        #{typeSeq,jdbcType=INTEGER},
+      </if>
+      <if test="fieldNm != null" >
+        #{fieldNm,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="store != null" >
+        #{store,jdbcType=VARCHAR},
+      </if>
+      <if test="indexAttr != null" >
+        #{indexAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="indexOptions != null" >
+        #{indexOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="ignoreMalformed != null" >
+        #{ignoreMalformed,jdbcType=VARCHAR},
+      </if>
+      <if test="includeInAll != null" >
+        #{includeInAll,jdbcType=VARCHAR},
+      </if>
+      <if test="indexAnalyzer != null" >
+        #{indexAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="searchAnalyzer != null" >
+        #{searchAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="termVector != null" >
+        #{termVector,jdbcType=VARCHAR},
+      </if>
+      <if test="omitNorms != null" >
+        #{omitNorms,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gslook.search.queryplanner.domain.TypeFieldExample" resultType="java.lang.Integer" >
+    select count(*) from type_field
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update type_field
+    <set >
+      <if test="record.typeFieldSeq != null" >
+        type_field_seq = #{record.typeFieldSeq,jdbcType=INTEGER},
+      </if>
+      <if test="record.regDtm != null" >
+        reg_dtm = #{record.regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.regrId != null" >
+        regr_id = #{record.regrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modDtm != null" >
+        mod_dtm = #{record.modDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.modrId != null" >
+        modr_id = #{record.modrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeSeq != null" >
+        type_seq = #{record.typeSeq,jdbcType=INTEGER},
+      </if>
+      <if test="record.fieldNm != null" >
+        field_nm = #{record.fieldNm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.store != null" >
+        store = #{record.store,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexAttr != null" >
+        index_attr = #{record.indexAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexOptions != null" >
+        index_options = #{record.indexOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ignoreMalformed != null" >
+        ignore_malformed = #{record.ignoreMalformed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.includeInAll != null" >
+        include_in_all = #{record.includeInAll,jdbcType=VARCHAR},
+      </if>
+      <if test="record.indexAnalyzer != null" >
+        index_analyzer = #{record.indexAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.searchAnalyzer != null" >
+        search_analyzer = #{record.searchAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termVector != null" >
+        term_vector = #{record.termVector,jdbcType=VARCHAR},
+      </if>
+      <if test="record.omitNorms != null" >
+        omit_norms = #{record.omitNorms,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update type_field
+    set type_field_seq = #{record.typeFieldSeq,jdbcType=INTEGER},
+      reg_dtm = #{record.regDtm,jdbcType=TIMESTAMP},
+      regr_id = #{record.regrId,jdbcType=VARCHAR},
+      mod_dtm = #{record.modDtm,jdbcType=TIMESTAMP},
+      modr_id = #{record.modrId,jdbcType=VARCHAR},
+      type_seq = #{record.typeSeq,jdbcType=INTEGER},
+      field_nm = #{record.fieldNm,jdbcType=VARCHAR},
+      type = #{record.type,jdbcType=VARCHAR},
+      store = #{record.store,jdbcType=VARCHAR},
+      index_attr = #{record.indexAttr,jdbcType=VARCHAR},
+      index_options = #{record.indexOptions,jdbcType=VARCHAR},
+      ignore_malformed = #{record.ignoreMalformed,jdbcType=VARCHAR},
+      include_in_all = #{record.includeInAll,jdbcType=VARCHAR},
+      index_analyzer = #{record.indexAnalyzer,jdbcType=VARCHAR},
+      search_analyzer = #{record.searchAnalyzer,jdbcType=VARCHAR},
+      term_vector = #{record.termVector,jdbcType=VARCHAR},
+      omit_norms = #{record.omitNorms,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gslook.search.queryplanner.domain.TypeField" >
+    update type_field
+    <set >
+      <if test="regDtm != null" >
+        reg_dtm = #{regDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="regrId != null" >
+        regr_id = #{regrId,jdbcType=VARCHAR},
+      </if>
+      <if test="modDtm != null" >
+        mod_dtm = #{modDtm,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modrId != null" >
+        modr_id = #{modrId,jdbcType=VARCHAR},
+      </if>
+      <if test="typeSeq != null" >
+        type_seq = #{typeSeq,jdbcType=INTEGER},
+      </if>
+      <if test="fieldNm != null" >
+        field_nm = #{fieldNm,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="store != null" >
+        store = #{store,jdbcType=VARCHAR},
+      </if>
+      <if test="indexAttr != null" >
+        index_attr = #{indexAttr,jdbcType=VARCHAR},
+      </if>
+      <if test="indexOptions != null" >
+        index_options = #{indexOptions,jdbcType=VARCHAR},
+      </if>
+      <if test="ignoreMalformed != null" >
+        ignore_malformed = #{ignoreMalformed,jdbcType=VARCHAR},
+      </if>
+      <if test="includeInAll != null" >
+        include_in_all = #{includeInAll,jdbcType=VARCHAR},
+      </if>
+      <if test="indexAnalyzer != null" >
+        index_analyzer = #{indexAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="searchAnalyzer != null" >
+        search_analyzer = #{searchAnalyzer,jdbcType=VARCHAR},
+      </if>
+      <if test="termVector != null" >
+        term_vector = #{termVector,jdbcType=VARCHAR},
+      </if>
+      <if test="omitNorms != null" >
+        omit_norms = #{omitNorms,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where type_field_seq = #{typeFieldSeq,jdbcType=INTEGER}
+  </update>
+</mapper>

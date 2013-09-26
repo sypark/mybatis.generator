@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gslook.search.indexer.dao.mapper.GsEsDocumentRankingGroupMapper" >
+  <resultMap id="BaseResultMap" type="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroup" >
+    <id column="DOC_ID" property="docId" jdbcType="VARCHAR" />
+    <result column="KEYWORDS" property="keywords" jdbcType="VARCHAR" />
+    <result column="REG_DATE" property="regDate" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    DOC_ID, KEYWORDS, REG_DATE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroupExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from gs_es_document_ranking_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroupExample" >
+    delete from gs_es_document_ranking_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroup" >
+    insert into gs_es_document_ranking_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="docId != null" >
+        DOC_ID,
+      </if>
+      <if test="keywords != null" >
+        KEYWORDS,
+      </if>
+      <if test="regDate != null" >
+        REG_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="docId != null" >
+        #{docId,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null" >
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null" >
+        #{regDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroupExample" resultType="java.lang.Integer" >
+    select count(*) from gs_es_document_ranking_group
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update gs_es_document_ranking_group
+    <set >
+      <if test="record.docId != null" >
+        DOC_ID = #{record.docId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null" >
+        KEYWORDS = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.regDate != null" >
+        REG_DATE = #{record.regDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update gs_es_document_ranking_group
+    set DOC_ID = #{record.docId,jdbcType=VARCHAR},
+      KEYWORDS = #{record.keywords,jdbcType=VARCHAR},
+      REG_DATE = #{record.regDate,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.gslook.search.queryplanner.domain.GsEsDocumentRankingGroup" >
+    update gs_es_document_ranking_group
+    <set >
+      <if test="keywords != null" >
+        KEYWORDS = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="regDate != null" >
+        REG_DATE = #{regDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where DOC_ID = #{docId,jdbcType=VARCHAR}
+  </update>
+</mapper>
