@@ -1,0 +1,4 @@
+mybatis.generator
+=================
+
+mybatis generator
